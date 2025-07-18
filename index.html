@@ -10,7 +10,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Arial', sans-serif;
             background: black;
@@ -20,7 +20,7 @@
             justify-content: center;
             color: white;
         }
-        
+
         .container {
             text-align: center;
             padding: 40px 20px;
@@ -32,24 +32,24 @@
             width: 100%;
             animation: fadeIn 0.8s ease-out;
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         h1 {
             font-size: 2.5em;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        
+
         p {
             font-size: 1.2em;
             margin-bottom: 30px;
             opacity: 0.9;
         }
-        
+
         .telegram-btn {
             background: linear-gradient(45deg, #0088cc, #54a9eb);
             color: white;
@@ -64,22 +64,22 @@
             box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4);
             font-weight: bold;
         }
-        
+
         .telegram-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0, 136, 204, 0.6);
         }
-        
+
         .telegram-btn:active {
             transform: translateY(0);
         }
-        
+
         .loading {
             margin-top: 20px;
             font-size: 0.9em;
             opacity: 0.7;
         }
-        
+
         .spinner {
             border: 3px solid rgba(255, 255, 255, 0.3);
             border-top: 3px solid white;
@@ -89,14 +89,29 @@
             animation: spin 1s linear infinite;
             margin: 20px auto;
         }
-        
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
+
         .hidden {
             display: none;
+        }
+
+        .aviso-tiktok {
+            background-color: rgba(0, 230, 118, 0.15);
+            border-left: 4px solid #00e676;
+            color: #e0ffe9;
+            padding: 15px;
+            margin-top: 25px;
+            border-radius: 10px;
+            font-size: 0.95em;
+            text-align: left;
+        }
+
+        .aviso-tiktok strong {
+            color: #ffffff;
         }
     </style>
 </head>
@@ -104,11 +119,20 @@
     <div class="container">
         <h1>Oiie ❤️</h1>
         <p>Clique no botão abaixo e vem me ver 👇🏻</p>
-        
+
         <a href="#" class="telegram-btn" id="telegramBtn">
             📱 Abrir Telegram
         </a>
-        
+
+        <!-- AVISO PARA USUÁRIOS DO TIKTOK -->
+        <div class="aviso-tiktok">
+            <strong>⚠️ Está no TikTok?</strong><br><br>
+            1️⃣ Clique nos <strong>três pontinhos ⋮</strong> no canto superior direito da tela.<br>
+            2️⃣ Selecione <strong>“Abrir no navegador”</strong>.<br>
+            3️⃣ Depois volte aqui e clique no botão para entrar no Telegram 🚀<br><br>
+            <em>Isso garante que o link funcione direitinho! 💕</em>
+        </div>
+
         <div class="loading hidden" id="loading">
             <div class="spinner"></div>
             <p>Redirecionando...</p>
@@ -118,42 +142,36 @@
     <script>
         // Link direto do Telegram
         const telegramLink = "https://t.me/parquinhodaisa_bot";
-        
+
         const telegramBtn = document.getElementById('telegramBtn');
         const loading = document.getElementById('loading');
-        
+
         // Função para abrir Telegram
         function openTelegram() {
             const telegramUrl = telegramLink;
-            
+
             // Mostrar loading
             loading.classList.remove('hidden');
-            
+
             // Tentar abrir o Telegram
             window.location.href = telegramUrl;
-            
+
             // Fallback caso não funcione
             setTimeout(() => {
                 loading.classList.add('hidden');
                 alert('Se o Telegram não abriu automaticamente, tente novamente ou acesse: ' + telegramLink);
             }, 3000);
         }
-        
+
         // Event listener para o botão
         telegramBtn.addEventListener('click', function(e) {
             e.preventDefault();
             openTelegram();
         });
-        
-        // Tentar redirecionamento automático (comentado por causa das proteções do TikTok)
-        // setTimeout(() => {
-        //     openWhatsApp();
-        // }, 2000);
-        
+
         // Detectar se veio do TikTok
         if (document.referrer.includes('tiktok.com')) {
             console.log('Usuário veio do TikTok');
-            // Aqui você pode adicionar analytics ou outras funcionalidades
         }
     </script>
 </body>
