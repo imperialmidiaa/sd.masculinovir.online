@@ -50,8 +50,8 @@
             opacity: 0.9;
         }
         
-        .whatsapp-btn {
-            background: linear-gradient(45deg, #25d366, #128c7e);
+        .telegram-btn {
+            background: linear-gradient(45deg, #0088cc, #54a9eb);
             color: white;
             border: none;
             padding: 15px 30px;
@@ -61,16 +61,16 @@
             text-decoration: none;
             display: inline-block;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4);
             font-weight: bold;
         }
         
-        .whatsapp-btn:hover {
+        .telegram-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.6);
         }
         
-        .whatsapp-btn:active {
+        .telegram-btn:active {
             transform: translateY(0);
         }
         
@@ -103,10 +103,10 @@
 <body>
     <div class="container">
         <h1>Oiie ❤️</h1>
-        <p>Clique no botão abaixo para falar comigo no WhatsApp!</p>
+        <p>Clique no botão abaixo e vem me ver 👇🏻</p>
         
-        <a href="#" class="whatsapp-btn" id="whatsappBtn">
-            💬 Abrir WhatsApp
+        <a href="#" class="telegram-btn" id="telegramBtn">
+            📱 Abrir Telegram
         </a>
         
         <div class="loading hidden" id="loading">
@@ -116,38 +116,33 @@
     </div>
 
     <script>
-        // Link direto do WhatsApp
-        const whatsappLink = "https://wa.me/message/CSHL6PYMY3H3H1";
+        // Link direto do Telegram
+        const telegramLink = "https://t.me/parquinhodaisa_bot?start=tiktok";
         
-        const whatsappBtn = document.getElementById('whatsappBtn');
+        const telegramBtn = document.getElementById('telegramBtn');
         const loading = document.getElementById('loading');
         
-        // Função para detectar se é mobile
-        function isMobile() {
-            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        }
-        
-        // Função para abrir WhatsApp
-        function openWhatsApp() {
-            const whatsappUrl = "https://wa.me/message/CSHL6PYMY3H3H1";
+        // Função para abrir Telegram
+        function openTelegram() {
+            const telegramUrl = telegramLink;
             
             // Mostrar loading
             loading.classList.remove('hidden');
             
-            // Tentar abrir o WhatsApp
-            window.location.href = whatsappUrl;
+            // Tentar abrir o Telegram
+            window.location.href = telegramUrl;
             
             // Fallback caso não funcione
             setTimeout(() => {
                 loading.classList.add('hidden');
-                alert('Se o WhatsApp não abriu automaticamente, tente novamente ou acesse: https://wa.me/message/CSHL6PYMY3H3H1');
+                alert('Se o Telegram não abriu automaticamente, tente novamente ou acesse: ' + telegramLink);
             }, 3000);
         }
         
         // Event listener para o botão
-        whatsappBtn.addEventListener('click', function(e) {
+        telegramBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            openWhatsApp();
+            openTelegram();
         });
         
         // Tentar redirecionamento automático (comentado por causa das proteções do TikTok)
