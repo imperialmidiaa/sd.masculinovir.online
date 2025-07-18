@@ -1,48 +1,165 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Redirecionando para o WhatsApp</title>
-  <meta http-equiv="refresh" content="2; URL=https://wa.me/message/CSHL6PYMY3H3H1">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      height: 100vh;
-      background-color: #ffffff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
-      color: #333;
-      padding: 20px;
-    }
-    h1 {
-      font-size: 32px;
-      color: #25d366;
-      margin-bottom: 12px;
-    }
-    h2 {
-      font-size: 20px;
-      color: #666;
-      margin-bottom: 24px;
-    }
-    a {
-      font-size: 18px;
-      color: #25d366;
-      font-weight: bold;
-      text-decoration: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecionamento</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: black;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .container {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 400px;
+            width: 100%;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .whatsapp-btn {
+            background: linear-gradient(45deg, #25d366, #128c7e);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            font-weight: bold;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+        
+        .whatsapp-btn:active {
+            transform: translateY(0);
+        }
+        
+        .loading {
+            margin-top: 20px;
+            font-size: 0.9em;
+            opacity: 0.7;
+        }
+        
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-  <h1>Oii, você vai ser redirecionado para o meu wpp 💋</h1>
-  <h2>Estou te esperando lá...</h2>
-  <p>Se não for redirecionado automaticamente, <a href="https://wa.me/message/CSHL6PYMY3H3H1">clique aqui</a>.</p>
+    <div class="container">
+        <h1>Oiie ❤️</h1>
+        <p>Clique no botão abaixo para falar comigo no WhatsApp!</p>
+        
+        <a href="#" class="whatsapp-btn" id="whatsappBtn">
+            💬 Abrir WhatsApp
+        </a>
+        
+        <div class="loading hidden" id="loading">
+            <div class="spinner"></div>
+            <p>Redirecionando...</p>
+        </div>
+    </div>
+
+    <script>
+        // Link direto do WhatsApp
+        const whatsappLink = "https://wa.me/message/CSHL6PYMY3H3H1";
+        
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        const loading = document.getElementById('loading');
+        
+        // Função para detectar se é mobile
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+        
+        // Função para abrir WhatsApp
+        function openWhatsApp() {
+            const whatsappUrl = "https://wa.me/message/CSHL6PYMY3H3H1";
+            
+            // Mostrar loading
+            loading.classList.remove('hidden');
+            
+            // Tentar abrir o WhatsApp
+            window.location.href = whatsappUrl;
+            
+            // Fallback caso não funcione
+            setTimeout(() => {
+                loading.classList.add('hidden');
+                alert('Se o WhatsApp não abriu automaticamente, tente novamente ou acesse: https://wa.me/message/CSHL6PYMY3H3H1');
+            }, 3000);
+        }
+        
+        // Event listener para o botão
+        whatsappBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openWhatsApp();
+        });
+        
+        // Tentar redirecionamento automático (comentado por causa das proteções do TikTok)
+        // setTimeout(() => {
+        //     openWhatsApp();
+        // }, 2000);
+        
+        // Detectar se veio do TikTok
+        if (document.referrer.includes('tiktok.com')) {
+            console.log('Usuário veio do TikTok');
+            // Aqui você pode adicionar analytics ou outras funcionalidades
+        }
+    </script>
 </body>
 </html>
