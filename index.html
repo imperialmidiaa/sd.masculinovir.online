@@ -18,7 +18,8 @@
         :root {
             --primary-color: #E94057;
             --secondary-color: #F27121;
-            --background-dark: #121212;
+            --background-start: #2a2a2a;
+            --background-end: #121212;
             --background-light: #1E1E1E;
             --text-primary: #FFFFFF;
             --text-secondary: #B3B3B3;
@@ -32,14 +33,32 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--background-dark);
             color: var(--text-primary);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            overflow-x: hidden;
+            overflow: hidden; /* Previne barras de rolagem do gradiente */
+            position: relative;
+            background: var(--background-end);
+        }
+
+        /* Fundo com Gradiente Animado */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle at top left, var(--background-start), var(--background-end) 70%);
+            animation: gradient-flow 15s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes gradient-flow {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .card {
@@ -51,9 +70,22 @@
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 1s ease-out;
             position: relative;
+            z-index: 1;
+            overflow: hidden;
         }
+        
+        /* Animações de Entrada Coreografadas */
+        .profile-pic, .title, .description, .cta-button, .tiktok-notice {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .profile-pic { animation-delay: 0.2s; }
+        .title { animation-delay: 0.4s; }
+        .description { animation-delay: 0.6s; }
+        .cta-button { animation-delay: 0.8s; }
+        .tiktok-notice { animation-delay: 1.0s; }
+
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -99,17 +131,36 @@
             text-decoration: none;
             border-radius: 12px;
             background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            background-size: 200% 100%;
             border: none;
             cursor: pointer;
-            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden; /* Essencial para o efeito de brilho */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 25px;
             box-shadow: 0 8px 20px rgba(233, 64, 87, 0.3);
         }
 
+        /* Efeito de Brilho (Shine Effect) */
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg);
+            transition: all 0.4s ease;
+            opacity: 0;
+        }
+
+        .cta-button:hover::after {
+            left: 100%;
+            opacity: 1;
+        }
+        
         .cta-button:hover {
             transform: translateY(-3px);
-            background-position: right center;
             box-shadow: 0 12px 25px rgba(242, 113, 33, 0.4);
         }
         
@@ -132,16 +183,15 @@
             color: var(--text-primary);
             font-weight: 500;
         }
-
     </style>
     <script>
         function openTelegram() {
             // Tenta abrir no app do Telegram
-            window.location.href = "tg://resolve?domain=parquinhodaisa_bot"; // <-- MANTENHA SEU LINK AQUI
+            window.location.href = "tg://resolve?domain=parquinhodaisa_bot"; // <-- COLOQUE SEU LINK AQUI
 
             // Fallback para o link web após 500ms se o app não abrir
             setTimeout(function() {
-                window.location.href = "https://t.me/parquinhodaisa_bot"; // <-- MANTENHA SEU LINK AQUI
+                window.location.href = "https://t.me/parquinhodaisa_bot"; // <-- COLOQUE SEU LINK AQUI
             }, 500);
         }
     </script>
@@ -168,6 +218,5 @@
             Para funcionar, clique nos <strong>três pontinhos (⋮)</strong> no canto da tela e escolha <strong>"Abrir no navegador"</strong> antes de clicar no botão acima.
         </div>
     </div>
-
 </body>
 </html>
